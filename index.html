@@ -4,7 +4,17 @@
 
     <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
     <script type="text/javascript" charset="utf-8">
-alert('aaa');
+navigator.camera.getPicture(onSuccess, onFail, { quality: 50 }); 
+
+function onSuccess(imageData) {
+    var image = document.getElementById('myImage');
+    image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+
 
     </script>
   </head>
