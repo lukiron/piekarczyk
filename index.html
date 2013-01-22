@@ -1,71 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Ganja Fruit</title>
-		<meta charset="UTF-8" />
-        <meta name="description" content="Ganja Fruit" />
-        <meta name="keywords" content="jquery, background image, image, menu, navigation, panels" />
-		<meta name="author" content="Codrops" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-		<link rel="stylesheet" type="text/css" href="css/sbimenu.css" />
-		<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' />
-		<link href='http://fonts.googleapis.com/css?family=News+Cycle&v1' rel='stylesheet' type='text/css' />
-
-    </head>
-    <body>
-		<div class="container">
-			<div class="header">
-				<h1>Ganja Fruit</h1>
-				<h2>Import / Eksport smakowitości polskich i hiszpańskich</h2>
-			</div>
-			<div class="content">
-				<div id="sbi_container" class="sbi_container">
-					<div class="sbi_panel" data-bg="images/1.jpg">
-						<a href="#" class="sbi_label">Owoce</a>
-						<div class="sbi_content">
-							<ul>
-								<li><a href="#">Polskie</a></li>
-								<li><a href="#">Hiszpańskie</a></li>								
-							</ul>
-						</div>						
-					</div>
-					<div class="sbi_panel" data-bg="images/2.jpg">
-						<a href="#" class="sbi_label">Warzywa</a>
-						<div class="sbi_content">
-							<ul>
-								<li><a href="#">Polskie</a></li>
-								<li><a href="#">Hiszpańskie</a></li>	
-							</ul>
-						</div>						
-					</div>
-					<div class="sbi_panel" data-bg="images/3.jpg">
-						<a href="#" class="sbi_label">Mięso</a>
-						<div class="sbi_content">
-							<ul>
-								<li><a href="#">Polskie</a></li>
-								<li><a href="#">Hiszpańskie</a></li>	
-							</ul>
-						</div>						
-					</div>					
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/jquery.bgImageMenu.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('#sbi_container').bgImageMenu({
-					defaultBg	: 'images/default.jpg',
-					menuSpeed	: 300,
-					border		: 1,
-					type		: {
-						mode		: 'verticalSlideAlt',
-						speed		: 450,
-						easing		: 'easeOutBack'
-					}
-				});
-			});
-		</script>
-    </body>
-</html>
+<html><body>
+  <div id="mapdiv"></div>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+ 
+    var pois = new OpenLayers.Layer.Text( "My Points",
+                    { location:"./textfile.txt",
+                      projection: map.displayProjection
+                    });
+    map.addLayer(pois);
+ 
+    //Set start centrepoint and zoom    
+    var lonLat = new OpenLayers.LonLat( 9.5788, 48.9773 )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+    var zoom=11;
+    map.setCenter (lonLat, zoom);  
+ 
+  </script>
+</body></html>
