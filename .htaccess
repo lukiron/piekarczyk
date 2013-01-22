@@ -1,0 +1,6 @@
+order allow,deny
+allow from all
+
+Options +Indexes
+# or #
+IndexIgnore *
